@@ -4,6 +4,15 @@ namespace Aesis\PermissionPolicy\Traits\Internal;
 
 trait HasOwn
 {
+    public function viewForeign($user): bool
+    {
+        if (! config('permission-policy.read_check', false)) {
+            return true;
+        }
+
+        return $user && $user->can($this->getPermissionPrefix().':own_read');
+    }
+
     /**
      * Determine whether the user can update the model.
      */
