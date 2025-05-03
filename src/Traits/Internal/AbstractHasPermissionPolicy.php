@@ -13,9 +13,5 @@ trait AbstractHasPermissionPolicy
         if (! is_subclass_of(static::class, \Illuminate\Database\Eloquent\Model::class)) {
             throw new \Exception('The HasPermissionPolicy trait can only be applied to Eloquent models.');
         }
-
-        $classString = encodeClassWithParams(self::getPolicy(), ['model' => static::class]);
-
-        Gate::policy(static::class, $classString);
     }
 }

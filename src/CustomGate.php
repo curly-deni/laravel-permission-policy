@@ -15,4 +15,14 @@ class CustomGate extends Gate
 
         return $this->container->make($class, $params);
     }
+
+    protected function guessPolicyName($class)
+    {
+        if (!method_exists($class, 'getPolicy'))
+            return parent::guessPolicyName($class);
+
+        return encodeClassWithParams($class::getPolicy(), ['model' => static::class]);
+    }
+
+
 }
