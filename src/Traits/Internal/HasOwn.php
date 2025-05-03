@@ -13,7 +13,7 @@ trait HasOwn
             return true;
         }
 
-        return $user && ($user->can($this->getPermissionPrefix().':update') || ($resource->user_id == $user?->id && $user->can($this->getPermissionPrefix().':update_own')));
+        return $user && ($user->can($this->getPermissionPrefix().':update') || ($resource->user_id == $user?->id && $user->can($this->getPermissionPrefix().':own_update')));
     }
 
     /**
@@ -25,6 +25,6 @@ trait HasOwn
             return true;
         }
 
-        return $user && ($user->can($this->getPermissionPrefix().':delete') || ($resource->user_id == $user?->id && $user->can($this->getPermissionPrefix().':delete_own')));
+        return $user && ($user->can($this->getPermissionPrefix().':delete') || ($resource->user_id == $user?->id && $user->can($this->getPermissionPrefix().':own_delete')));
     }
 }

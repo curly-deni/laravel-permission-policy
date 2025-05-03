@@ -1,84 +1,97 @@
-# This is my package laravel-permission-policy
+# Laravel Permission Policy
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/curly-deni/laravel-permission-policy.svg?style=flat-square)](https://packagist.org/packages/curly-deni/laravel-permission-policy)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/curly-deni/laravel-permission-policy/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/curly-deni/laravel-permission-policy/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/curly-deni/laravel-permission-policy/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/curly-deni/laravel-permission-policy/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Code Style](https://img.shields.io/github/actions/workflow/status/curly-deni/laravel-permission-policy/fix-php-code-style-issues.yml?branch=main\&label=code%20style\&style=flat-square)](https://github.com/curly-deni/laravel-permission-policy/actions?query=workflow%3A%22Fix+PHP+code+style+issues%22+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/curly-deni/laravel-permission-policy.svg?style=flat-square)](https://packagist.org/packages/curly-deni/laravel-permission-policy)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+**A simple and flexible way to define and apply CRUD policies in Laravel using traits.**
+Designed to work seamlessly with [`laravel-permission-maker`](https://github.com/curly-deni/laravel-permission-maker) 🎯
 
-## Support us
+---
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-permission-policy.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-permission-policy)
+## ✨ Features
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+* ✅ Out-of-the-box CRUD permission checks
+* 🔒 Support for private resource visibility
+* 👤 Ownership-based access control
+* 🧩 Easy integration using traits
+* ⚙️ Configurable behavior via simple settings
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+---
 
-## Installation
+## 📦 Installation
 
-You can install the package via composer:
+Install the package via Composer:
 
 ```bash
 composer require curly-deni/laravel-permission-policy
 ```
 
-You can publish and run the migrations with:
+---
 
-```bash
-php artisan vendor:publish --tag="laravel-permission-policy-migrations"
-php artisan migrate
-```
+## ⚙️ Configuration
 
-You can publish the config file with:
+After publishing the config file with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-permission-policy-config"
 ```
 
-This is the contents of the published config file:
+You’ll get the following settings in `config/permission-policy.php`:
 
 ```php
 return [
+
+    'register_gate' => true, // Automatically register default gate with policy bindings
+
+    // Toggle specific permission checks:
+    'read_check' => false,   // Use 'read' instead of 'view'
+    'view_check' => true,    // Check for 'view' permission
+    'create_check' => true,  // Check for 'create' permission
+    'update_check' => true,  // Check for 'update' permission
+    'delete_check' => true,  // Check for 'delete' permission
 ];
 ```
 
-Optionally, you can publish the views using
+> 🛠️ **Note:** If you disable the automatic `gate` registration (`'register_gate' => false`), make sure your custom gate implementation supports passing policy arguments via **query parameters**.
+> You can use the included helper functions to handle this:
+>
+> * `encodeClassWithParams(string $class, array $params): string`
+    >   Encodes a class name and arguments into a query-safe string.
+>
+> * `decodeClassWithParams(string $encoded): array`
+    >   Decodes the encoded string back into the original class name and parameters.
 
-```bash
-php artisan vendor:publish --tag="laravel-permission-policy-views"
-```
+---
 
-## Usage
+## 🚀 Usage
 
-```php
-$permissionPolicy = new Aesis\PermissionPolicy();
-echo $permissionPolicy->echoPhrase('Hello, Aesis!');
-```
+This package is intended to be used **with** [laravel-permission-maker](https://github.com/curly-deni/laravel-permission-maker).
 
-## Testing
+Choose the trait that suits your needs:
 
-```bash
-composer test
-```
+| Trait                                                                             | Description                           |
+| --------------------------------------------------------------------------------- | ------------------------------------- |
+| [`HasResourcePolicy`](src/Traits/HasResourcePolicy.php)                           | Basic CRUD permission checks          |
+| [`HasPrivateResourcePolicy`](src/Traits/HasPrivateResourcePolicy.php)             | Adds private resource view checks     |
+| [`HasOwnResourcePolicy`](src/Traits/HasOwnResourcePolicy.php)                     | Enables edit/delete for own resources |
+| [`HasOwnAndPrivateResourcePolicy`](src/Traits/HasOwnAndPrivateResourcePolicy.php) | Combines ownership and private access |
 
-## Changelog
+---
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+## 🤝 Contributing
 
-## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+---
 
-## Security Vulnerabilities
+## 🙌 Credits
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+* [Danila Mikhalev](https://github.com/curly-deni)
+* [All Contributors](../../contributors)
 
-## Credits
+---
 
-- [Danila Mikhalev](https://github.com/curly-deni)
-- [All Contributors](../../contributors)
+## 📄 License
 
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+This package is open-sourced software licensed under the [MIT license](LICENSE.md).

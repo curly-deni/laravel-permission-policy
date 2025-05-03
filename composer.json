@@ -1,10 +1,17 @@
 {
     "name": "curly-deni/laravel-permission-policy",
-    "description": "This is my package laravel-permission-policy",
+    "description": "A lightweight Laravel package for reusable, trait-based policy checks supporting CRUD, ownership, and private resource access.",
     "keywords": [
-        "Danila Mikhalev",
         "laravel",
-        "laravel-permission-policy"
+        "policy",
+        "authorization",
+        "permissions",
+        "traits",
+        "gates",
+        "access control",
+        "crud",
+        "private resources",
+        "ownership"
     ],
     "homepage": "https://github.com/curly-deni/laravel-permission-policy",
     "license": "MIT",

@@ -10,7 +10,7 @@ trait HasPrivateView
             return true;
         }
 
-        return $user && $this->read($user) && $user->can($this->getPermissionPrefix().':private_view');
+        return $user && $this->read($user) && ($user->can($this->getPermissionPrefix().':private_view') || $user->can($this->getPermissionPrefix().':own_read'));
     }
 
     public function view($user, $resource): bool
