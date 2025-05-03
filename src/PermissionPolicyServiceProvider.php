@@ -13,7 +13,11 @@ class PermissionPolicyServiceProvider extends PackageServiceProvider
         parent::register();
 
         if (config('permission-policy.register_gate', false)) {
-            $this->app->singleton(Gate::class, CustomGate::class);
+            $this->app->singleton(Gate::class, function ($app) {
+                return new CustomGate($app, function () use ($app) {
+                    return $app['auth']->user();
+                });
+            });
         }
     }
 
