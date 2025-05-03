@@ -34,7 +34,7 @@ composer require curly-deni/laravel-permission-policy
 After publishing the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-permission-policy-config"
+php artisan vendor:publish --tag="permission-policy-config"
 ```
 
 You’ll get the following settings in `config/permission-policy.php`:
