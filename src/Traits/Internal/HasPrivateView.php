@@ -6,17 +6,19 @@ trait HasPrivateView
 {
     public function viewAny($user): bool
     {
-        if (!config('permission-policy.view_check', false))
+        if (! config('permission-policy.view_check', false)) {
             return true;
+        }
 
-        return $user && $this->read($user) && $user->can($this->getPermissionPrefix() . ':private_view');
+        return $user && $this->read($user) && $user->can($this->getPermissionPrefix().':private_view');
     }
 
     public function view($user, $resource): bool
     {
-        if (!config('permission-policy.view_check', false))
+        if (! config('permission-policy.view_check', false)) {
             return true;
+        }
 
-        return $this->read($user) && ($resource->public || ($user && $user->can($this->getPermissionPrefix() . ':private_view')));
+        return $this->read($user) && ($resource->public || ($user && $user->can($this->getPermissionPrefix().':private_view')));
     }
 }

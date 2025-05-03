@@ -18,10 +18,11 @@ class ResourcePolicy
 
     public function read($user): bool
     {
-        if (!config('permission-policy.read_check', false))
+        if (! config('permission-policy.read_check', false)) {
             return true;
+        }
 
-        return $user && $user->can($this->getPermissionPrefix() . ':read');
+        return $user && $user->can($this->getPermissionPrefix().':read');
     }
 
     public function viewAny($user): bool
@@ -42,10 +43,11 @@ class ResourcePolicy
      */
     public function create($user): bool
     {
-        if (!config('permission-policy.create_check', false))
+        if (! config('permission-policy.create_check', false)) {
             return true;
+        }
 
-        return $user && $user->can($this->getPermissionPrefix() . ':create');
+        return $user && $user->can($this->getPermissionPrefix().':create');
     }
 
     /**
@@ -53,10 +55,11 @@ class ResourcePolicy
      */
     public function update($user, $resource): bool
     {
-        if (!config('permission-policy.update_check', false))
+        if (! config('permission-policy.update_check', false)) {
             return true;
+        }
 
-        return $user && $user->can($this->getPermissionPrefix() . ':update');
+        return $user && $user->can($this->getPermissionPrefix().':update');
     }
 
     /**
@@ -64,9 +67,10 @@ class ResourcePolicy
      */
     public function delete($user, $resource): bool
     {
-        if (!config('permission-policy.delete_check', false))
+        if (! config('permission-policy.delete_check', false)) {
             return true;
+        }
 
-        return $user && $user->can($this->getPermissionPrefix() . ':delete');
+        return $user && $user->can($this->getPermissionPrefix().':delete');
     }
 }

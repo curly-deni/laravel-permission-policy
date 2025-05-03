@@ -17,7 +17,6 @@ class PermissionPolicyServiceProvider extends PackageServiceProvider
         }
     }
 
-
     public function configurePackage(Package $package): void
     {
         /*
