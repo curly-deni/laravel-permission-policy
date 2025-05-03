@@ -2,8 +2,6 @@
 
 namespace Aesis\PermissionPolicy\Traits\Internal;
 
-use App\Models\User;
-
 trait HasOwn
 {
 
