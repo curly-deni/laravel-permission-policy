@@ -22,7 +22,7 @@ class CustomGate extends Gate
             return parent::guessPolicyName($class);
         }
 
-        return [encodeClassWithParams($class::getPolicy(), ['model' => static::class])];
+        return [encodeClassWithParams($class::getPolicy(), ['model' => $class])];
     }
 
     public function getPolicyFor($class)
