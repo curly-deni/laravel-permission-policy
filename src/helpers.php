@@ -2,18 +2,18 @@
 
 use Illuminate\Support\Str;
 
-if (!function_exists('encodeClassWithParams')) {
+if (! function_exists('encodeClassWithParams')) {
     function encodeClassWithParams(string $class, array $params = []): string
     {
         if (empty($params)) {
             return $class;
         }
 
-        return $class . '?' . http_build_query($params, '', '&', PHP_QUERY_RFC3986);
+        return $class.'?'.http_build_query($params, '', '&', PHP_QUERY_RFC3986);
     }
 }
 
-if (!function_exists('decodeClassWithParams')) {
+if (! function_exists('decodeClassWithParams')) {
     function decodeClassWithParams(string $string): array
     {
         [$class, $query] = array_pad(explode('?', $string, 2), 2, null);
@@ -27,7 +27,7 @@ if (!function_exists('decodeClassWithParams')) {
     }
 }
 
-if (!function_exists('convertClassToBaseSnake')) {
+if (! function_exists('convertClassToBaseSnake')) {
 
     function convertClassToBaseSnake($class)
     {
