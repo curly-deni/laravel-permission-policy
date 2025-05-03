@@ -24,5 +24,33 @@ class CustomGate extends Gate
         return encodeClassWithParams($class::getPolicy(), ['model' => static::class]);
     }
 
+    public function getPolicyFor($class)
+    {
+        if (is_object($class)) {
+            $class = get_class($class);
+        }
+
+        if (! is_string($class)) {
+            return;
+        }
+
+        if (isset($this->policies[$class])) {
+            return $this->resolvePolicy($this->policies[$class]);
+        }
+
+        foreach ($this->guessPolicyName($class) as $guessedPolicy) {
+            [$class, $params] = decodeClassWithParams($guessedPolicy);
+            if (class_exists($class)) {
+                return $this->resolvePolicy($guessedPolicy);
+            }
+        }
+
+        foreach ($this->policies as $expected => $policy) {
+            if (is_subclass_of($class, $expected)) {
+                return $this->resolvePolicy($policy);
+            }
+        }
+    }
+
 
 }
