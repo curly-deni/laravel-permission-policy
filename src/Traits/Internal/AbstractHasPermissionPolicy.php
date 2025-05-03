@@ -2,8 +2,6 @@
 
 namespace Aesis\PermissionPolicy\Traits\Internal;
 
-use Illuminate\Support\Facades\Gate;
-
 trait AbstractHasPermissionPolicy
 {
     abstract public static function getPolicy();

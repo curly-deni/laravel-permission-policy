@@ -18,11 +18,10 @@ class CustomGate extends Gate
 
     protected function guessPolicyName($class)
     {
-        if (!method_exists($class, 'getPolicy'))
+        if (! method_exists($class, 'getPolicy')) {
             return parent::guessPolicyName($class);
+        }
 
         return encodeClassWithParams($class::getPolicy(), ['model' => static::class]);
     }
-
-
 }
