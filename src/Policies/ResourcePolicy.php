@@ -6,7 +6,7 @@ class ResourcePolicy
 {
     protected string $model;
 
-    public function __construct(string $model)
+    public function __construct(string $model = '')
     {
         $this->model = $model;
     }
