@@ -2,6 +2,8 @@
 
 namespace Aesis\PermissionPolicy\Policies;
 
+use Aesis\PermissionPolicy\Permissionable;
+
 class ResourcePolicy
 {
     protected string $model;
@@ -13,6 +15,11 @@ class ResourcePolicy
 
     protected function getPermissionPrefix()
     {
+
+        if (is_subclass_of($this->model, Permissionable::class)) {
+            return $this->model::getPermissionPrefix();
+        }
+
         return convertClassToBaseSnake($this->model);
     }
 
