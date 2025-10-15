@@ -4,5 +4,5 @@ namespace Aesis\PermissionPolicy;
 
 interface Permissionable
 {
-    public static function getPermissionPrefix(): static;
+    public static function getPermissionPrefix(): string;
 }
