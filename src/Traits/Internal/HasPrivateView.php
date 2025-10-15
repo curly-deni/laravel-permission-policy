@@ -4,7 +4,6 @@ namespace Aesis\PermissionPolicy\Traits\Internal;
 
 trait HasPrivateView
 {
-
     public function viewPrivate($user): bool
     {
         if (! config('permission-policy.view_check', false)) {
